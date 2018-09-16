@@ -13,7 +13,7 @@ public class Program2 {
 
 		Scanner sc = new Scanner(System.in);
 
-		System.out.print("What is the dollar price?");
+		System.out.print("What is sthe dollar price?");
 		CurrencyConverter.currencyPrice = sc.nextDouble();
 		
 		System.out.print("How many dollars will be bought?");
