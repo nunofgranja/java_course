@@ -28,7 +28,7 @@ public class BankAccount {
 
 	public void withdrawBalance(double value) {
 
-		balance -= value - tax;
+		balance = balance - value - tax;
 	}
 
 	public String getName() {

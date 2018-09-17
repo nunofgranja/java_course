@@ -2,8 +2,7 @@ package application;
 
 import java.util.Locale;
 import java.util.Scanner;
-
-import util.CurrencyConverter;
+import entities.BankAccount;
 
 public class Program {
 
@@ -13,14 +12,44 @@ public class Program {
 
 		Scanner sc = new Scanner(System.in);
 
- System.out.println("commit granja");
-		System.out.print("What is sthe dollar price?");
+		System.out.print("Enter Account number:");
+		int accNumber = sc.nextInt();
 
-		CurrencyConverter.currencyPrice = sc.nextDouble();
+		sc.nextLine();
 		
-		System.out.print("How many dollars will be bought?");
+		System.out.print("Enter Account holder:");
+		String accName = sc.nextLine();
+
+		System.out.print("Is there na initial deposit (y/n)? ");
+		char initialDepositFlag = sc.next().charAt(0);
+
+		double initialDeposit = 0.00;
+
+		if (initialDepositFlag == 'y')
+
+		{
+			System.out.print("Enter initial deposit value: ");
+			initialDeposit = sc.nextDouble();
+
+		}
+
+		BankAccount bankAccount = new BankAccount(accName, accNumber, initialDeposit);
+
+		System.out.printf("%n%n");
 		
-		System.out.printf("Amount to be paid in reais = %.2f", CurrencyConverter.calculateTotalPurchasePrice(sc.nextDouble()));
+		System.out.print("Enter a deposit value: ");
+		double depositVal = sc.nextDouble();
+		bankAccount.addBalance(depositVal);
+		System.out.println("Updated account data: ");
+		System.out.println("Account " + bankAccount.getNumber() + ", Holder: " + bankAccount.getName() + ", Balance: " + bankAccount.getBalance());
+		
+		System.out.println("");
+		
+		System.out.print("Enter a withdraw value: ");
+		double withdrawVal = sc.nextDouble();
+		bankAccount.withdrawBalance(withdrawVal);
+		System.out.println("Account " + bankAccount.getNumber() + ", Holder: " + bankAccount.getName() + ", Balance: " + bankAccount.getBalance());
+		
 		
 
 		sc.close();
