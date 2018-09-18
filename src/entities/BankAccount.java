@@ -28,7 +28,7 @@ public class BankAccount {
 
 	public void withdrawBalance(double value) {
 
-		balance = balance - value - tax;
+		balance -= value + tax;
 	}
 
 	public String getName() {
@@ -45,6 +45,17 @@ public class BankAccount {
 
 	public double getBalance() {
 		return balance;
+	}
+
+	@Override
+	public String toString() {
+		return 
+				"Account " 
+				+ number 
+				+ ", Holder: " 
+				+ number + 
+				", Balance: $" 
+				+ String.format("%.2f", balance);
 	}
 
 }

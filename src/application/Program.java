@@ -9,7 +9,7 @@ public class Program {
 	public static void main(String[] args) {
 
 		Locale.setDefault(Locale.US);
-
+		BankAccount bankAccount;
 		Scanner sc = new Scanner(System.in);
 
 		System.out.print("Enter Account number:");
@@ -23,17 +23,21 @@ public class Program {
 		System.out.print("Is there na initial deposit (y/n)? ");
 		char initialDepositFlag = sc.next().charAt(0);
 
-		double initialDeposit = 0.00;
-
+		
 		if (initialDepositFlag == 'y')
 
-		{
+		{	
+			double initialDeposit;
 			System.out.print("Enter initial deposit value: ");
 			initialDeposit = sc.nextDouble();
+			bankAccount = new BankAccount(accName, accNumber, initialDeposit);
 
 		}
-
-		BankAccount bankAccount = new BankAccount(accName, accNumber, initialDeposit);
+		else
+		{
+			bankAccount = new BankAccount(accName, accNumber);
+		}
+          
 
 		System.out.printf("%n%n");
 		
@@ -41,14 +45,15 @@ public class Program {
 		double depositVal = sc.nextDouble();
 		bankAccount.addBalance(depositVal);
 		System.out.println("Updated account data: ");
-		System.out.println("Account " + bankAccount.getNumber() + ", Holder: " + bankAccount.getName() + ", Balance: " + bankAccount.getBalance());
+		System.out.println(bankAccount);
 		
 		System.out.println("");
 		
 		System.out.print("Enter a withdraw value: ");
 		double withdrawVal = sc.nextDouble();
 		bankAccount.withdrawBalance(withdrawVal);
-		System.out.println("Account " + bankAccount.getNumber() + ", Holder: " + bankAccount.getName() + ", Balance: " + bankAccount.getBalance());
+		System.out.println("Updated account data: ");
+		System.out.println(bankAccount);
 		
 		
 
