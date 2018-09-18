@@ -2,59 +2,51 @@ package application;
 
 import java.util.Locale;
 import java.util.Scanner;
-import entities.BankAccount;
+import entities.Room;
 
 public class Program {
 
 	public static void main(String[] args) {
 
 		Locale.setDefault(Locale.US);
-		BankAccount bankAccount;
+	
 		Scanner sc = new Scanner(System.in);
-
-		System.out.print("Enter Account number:");
-		int accNumber = sc.nextInt();
-
-		sc.nextLine();
 		
-		System.out.print("Enter Account holder:");
-		String accName = sc.nextLine();
-
-		System.out.print("Is there na initial deposit (y/n)? ");
-		char initialDepositFlag = sc.next().charAt(0);
-
+		Room[] vect = new Room[10];
+	
+		System.out.print("How many rooms will be rented? ");
+		int n = sc.nextInt();
+		int i = 0;
+		int countVar = 0;
 		
-		if (initialDepositFlag == 'y')
-
-		{	
-			double initialDeposit;
-			System.out.print("Enter initial deposit value: ");
-			initialDeposit = sc.nextDouble();
-			bankAccount = new BankAccount(accName, accNumber, initialDeposit);
-
-		}
-		else
+		for(i=0;i<n;i++)
 		{
-			bankAccount = new BankAccount(accName, accNumber);
+			
+			System.out.println("Rent #" + i+1);
+			 sc.nextLine();
+			System.out.print("Name: ");
+			String name = sc.nextLine();
+			System.out.print("Email: ");
+			String email = sc.nextLine();
+			System.out.print("Room: ");
+			int roomNumber = sc.nextInt();
+			
+			
+			vect[roomNumber] = new Room(name,email);
 		}
-          
-
-		System.out.printf("%n%n");
 		
-		System.out.print("Enter a deposit value: ");
-		double depositVal = sc.nextDouble();
-		bankAccount.addBalance(depositVal);
-		System.out.println("Updated account data: ");
-		System.out.println(bankAccount);
-		
-		System.out.println("");
-		
-		System.out.print("Enter a withdraw value: ");
-		double withdrawVal = sc.nextDouble();
-		bankAccount.withdrawBalance(withdrawVal);
-		System.out.println("Updated account data: ");
-		System.out.println(bankAccount);
-		
+		for(i=0;i<vect.length;i++)
+		{
+			if(vect[i]!= null)
+			{
+			    countVar += 1;
+			    System.out.println("Busy Rooms:");
+				System.out.println(i + ": " + vect[i].getName() + ", " + vect[i].getEmail());
+			  
+			}
+			
+			
+		}
 		
 
 		sc.close();
