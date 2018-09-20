@@ -1,53 +1,64 @@
 package application;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Locale;
 import java.util.Scanner;
-import entities.Room;
+import entities.Employee3;
 
 public class Program {
 
 	public static void main(String[] args) {
 
 		Locale.setDefault(Locale.US);
-	
 		Scanner sc = new Scanner(System.in);
-		
-		Room[] vect = new Room[10];
-	
-		System.out.print("How many rooms will be rented? ");
+		Employee3 employee;
+		List<Employee3> list = new ArrayList<>();
+
+		System.out.print("How many employees will be registered? ");
 		int n = sc.nextInt();
 		int i = 0;
-		int countVar = 0;
-		
-		for(i=0;i<n;i++)
-		{
-			
-			System.out.println("Rent #" + i+1);
-			 sc.nextLine();
-			System.out.print("Name: ");
+
+		for (i = 0; i < n; i++) {
+			System.out.println("Employee #" + i + 1 +  ":");
+			System.out.print("ID:");
+			Integer id = sc.nextInt();
+			System.out.print("Name:");
+			sc.nextLine();
 			String name = sc.nextLine();
-			System.out.print("Email: ");
-			String email = sc.nextLine();
-			System.out.print("Room: ");
-			int roomNumber = sc.nextInt();
-			
-			
-			vect[roomNumber] = new Room(name,email);
+			System.out.print("Salary :");
+			Double salary = sc.nextDouble();
+
+			employee = new Employee3(id, name, salary);
+
+			list.add(employee);
+
 		}
+
+		System.out.print("Enter the employee id that will have salary increase:");
+		Integer id = sc.nextInt();
+		System.out.print("Enter the percentage:");
+		Double raisePercent = sc.nextDouble();
+
 		
-		for(i=0;i<vect.length;i++)
+		Employee3 emp = list.stream().filter(x -> x.getId() == id).findFirst().orElse(null);
+		if (emp == null) {
+			System.out.println("This id does not exist!");
+		}
+		else {
+			System.out.print("Enter the percentage: ");
+			double percentage = sc.nextDouble();
+			emp.increaseSalary(raisePercent);
+		}
+
+		System.out.println("List of employees: ");
+
+		for (Employee3 x : list)
+
 		{
-			if(vect[i]!= null)
-			{
-			    countVar += 1;
-			    System.out.println("Busy Rooms:");
-				System.out.println(i + ": " + vect[i].getName() + ", " + vect[i].getEmail());
-			  
-			}
-			
-			
+			System.out.println(x);
+
 		}
-		
 
 		sc.close();
 	}
